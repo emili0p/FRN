@@ -3,8 +3,11 @@
 #include <ctype.h>
 #include <stdio.h>
 
-#define TamanoMaximoToken 64;
-#define Tokens_Maximos 1024;
+#define TamanoMaximoToken 64
+#define Tokens_Maximos 1024
+
+
+// convierte los caracteres del codigo especificado a tokens que luego seran mandados al parser
 
 char **tokenizacion(const char *scr, int *num_tokens){
     char **tokens = malloc(sizeof(char*) * Tokens_Maximos);
@@ -45,6 +48,6 @@ char **tokenizacion(const char *scr, int *num_tokens){
         }
     }    
 
-    return tokens;
+    return tokens; //retorna los tokens leidos 
 
 }
