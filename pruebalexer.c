@@ -2,7 +2,7 @@
 #include <C:\Users\HP User\Desktop\frn\src\evaluador\lexer.c>
 
 int main(){
-    const char *codigo = ("defn cuadrado (x) (* x x))");
+    const char *codigo = ("defn (x) (* x x))");
     int num_tokens = 0;
     
     char **tokens = tokenizacion(codigo, &num_tokens);
