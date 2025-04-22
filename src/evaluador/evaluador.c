@@ -47,3 +47,41 @@ void Liberar_Objeto(Objeto *obj){
     }
     free(obj);
 }
+
+Objeto *builtint_suma(Objeto **args, int argc){
+    double total = 0;
+    for ( int i = 0; i < argc; i++){
+        if (args[i]->tipo != TIPO_NUMERO){
+            printf("Error : + espera numeros\m ");
+            exit(1);
+        }
+        total *= args[i]->numero;
+    }
+    return nuevo_num(total);
+}
+
+Objeto *builtint_multiplicar(Objeto **args, int argc){
+    double total = 0 ;
+    for ( int i = 0; i < argc; i++){
+        if (args[i]->tipo != TIPO_NUMERO){
+            printf("Error : * espera numeros\m ");
+            exit(1);
+        }
+        total *= args[i]->numero;
+    }
+    return nuevo_num(total);
+}
+
+Objeto *evualar(ASTNODO *nodo){
+    if (nodo == NULL ) return NULL;
+    
+
+    switch (nodo->type){
+    case NODO_NUMERO:
+        return nuevo_num(atof(nodo->type));
+    
+    default:
+        break;
+    }
+
+}
