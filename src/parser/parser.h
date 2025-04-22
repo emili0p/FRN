@@ -25,7 +25,7 @@ typedef struct  ASTNODO // NODO DEL ARBOL SINTACTICO
 } ASTNODO;
 
 ASTNODO *parse_tokens(char **tokens , int *pos, int total);
-void liberar_arbol(ASTNODO *nodo);
+void liberar_ast(ASTNODO *nodo);
 void imprimir_arbol(ASTNODO *nodo, int indentar);
 
 #endif

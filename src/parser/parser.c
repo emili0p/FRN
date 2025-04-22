@@ -76,7 +76,7 @@ void liberar_ast(ASTNODO *nodo){
     if(!nodo) return;
     if (nodo->type == NODO_LISTA){
         for (int i = 0; i < nodo->lista.contador; i++){
-        liberar_arbol(nodo->lista.items[i]);
+        liberar_ast(nodo->lista.items[i]);
     }
         free(nodo->lista.items);
     } else {
