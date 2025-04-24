@@ -34,6 +34,7 @@ struct  Objeto
 };
 
 Objeto *evualar(ASTNODO *nodo);
+Objeto *buscar_variable(Entorno *env, const char *nombre);
 void Liberar_Objeto(Objeto *obj);
 
 
