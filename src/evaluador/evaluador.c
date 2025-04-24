@@ -47,41 +47,75 @@ void Liberar_Objeto(Objeto *obj){
     }
     free(obj);
 }
-
-Objeto *builtint_suma(Objeto **args, int argc){
-    double total = 0;
-    for ( int i = 0; i < argc; i++){
-        if (args[i]->tipo != TIPO_NUMERO){
-            printf("Error : + espera numeros\m ");
-            exit(1);
-        }
-        total *= args[i]->numero;
+/* OPERACIONES BASICAS DEFINIDAS EN EL LENGUAJE */
+Objeto *builtin_suma(Objeto **args, int argc) {
+    Objeto *res = malloc(sizeof(Objeto));
+    res->tipo = TIPO_NUMERO;
+    res->numero = 0;
+    for (int i = 0; i < argc; i++) {
+        res->numero += args[i]->numero;
     }
-    return nuevo_num(total);
+    return res;
 }
 
-Objeto *builtint_multiplicar(Objeto **args, int argc){
-    double total = 0 ;
-    for ( int i = 0; i < argc; i++){
-        if (args[i]->tipo != TIPO_NUMERO){
-            printf("Error : * espera numeros\m ");
-            exit(1);
-        }
-        total *= args[i]->numero;
+Objeto *builtin_multiplica(Objeto **args, int argc) {
+    Objeto *res = malloc(sizeof(Objeto));
+    res->tipo = TIPO_NUMERO;
+    res->numero = 1;
+    for (int i = 0; i < argc; i++) {
+        res->numero *= args[i]->numero;
     }
-    return nuevo_num(total);
+    return res;
 }
 
-Objeto *evualar(ASTNODO *nodo){
-    if (nodo == NULL ) return NULL;
-    
+//TODO FIX THIS
+Objeto *evaluar(ASTNODO *nodo) {
+    if (nodo == NULL) return NULL;
 
-    switch (nodo->type){
-    case NODO_NUMERO:
-        return nuevo_num(atof(nodo->type));
-    
-    default:
-        break;
+    switch (nodo->type) {
+        case NODO_NUMERO: {
+            Objeto *obj = malloc(sizeof(Objeto));
+            obj->tipo = TIPO_NUMERO;
+            obj->numero = nodo->number;
+            return obj;
+        }
+
+        case NODO_SIMBOLO: {
+            Objeto *obj = malloc(sizeof(Objeto));
+            obj->tipo = TIPO_SIMBOLO;
+            obj->simbolo = strdup(nodo->symbol);
+            return obj;
+        }
+
+        case NODO_LISTA: {
+            if (nodo->lista.contador == 0) return NULL;
+
+            ASTNODO *primero = nodo->lista.items[0];
+            Objeto *fn = evaluar(primero);
+
+            int argc = nodo->lista.contador - 1;
+            Objeto **args = malloc(sizeof(Objeto*) * argc);
+
+            for (int i = 0; i < argc; i++) {
+                args[i] = evaluar(nodo->lista.items[i + 1]);
+            }
+
+            if (fn->tipo == TIPO_SIMBOLO) {
+                if (strcmp(fn->simbolo, "+") == 0) {
+                    return builtin_suma(args, argc);
+                } else if (strcmp(fn->simbolo, "*") == 0) {
+                    return builtin_multiplica(args, argc);
+                } else {
+                    printf("Error: función desconocida %s\n", fn->simbolo);
+                    exit(1);
+                }
+            }
+
+            printf("Error: tipo de función no soportado\n");
+            exit(1);
+        }
+
+        default:
+            return NULL;
     }
-
 }
