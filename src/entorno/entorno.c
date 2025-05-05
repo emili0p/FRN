@@ -15,14 +15,14 @@ void definir_var(Entorno **env, const char *nombre, Objeto *valor){
     *env = nodo;
 }
 
-Objeto *buscar_variable(Entorno *env, const char nombre){
-    while (env != NULL){ //entra solo si en entorno hay algo si no sale 
-        if (strcmp(env->nombre, nombre == 0)){
+Objeto *buscar_variable(Entorno *env, const char *nombre){
+    while (env != NULL){
+        if (strcmp(env->nombre, nombre) == 0){
             return env->valor;
         }
         env = env->siguiente;
     }
-    printf("error la variable no esta definida %s \n" );
+    printf("error: la variable no está definida: %s\n", nombre);
     exit(1);
 }
 

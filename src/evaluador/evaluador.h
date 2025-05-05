@@ -5,7 +5,8 @@ listas funciones integradas y todos los objetos que podra leer para evaluarse lu
 #ifndef EVALUADOR_H
 #define EVALUADOR_H
 
-#include "src\parser\parser.h"
+#include "entorno/entorno.h"
+#include "parser/parser.h"
 
 typedef enum{
     TIPO_NUMERO,
