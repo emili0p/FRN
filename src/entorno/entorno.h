@@ -11,7 +11,7 @@ typedef struct Entorno {
     Objeto *valor;
     struct Entorno *siguiente;
 } Entorno;
-//TODO FIX THIS 
+//fixeado
 
 // funciones
 Entorno *crear_entorno();
