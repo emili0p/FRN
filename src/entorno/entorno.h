@@ -1,10 +1,10 @@
-// entorno.h
+
 
 /* mapeo de las variables del entorno */
 #ifndef ENTORNO_H
 #define ENTORNO_H
 
-#include "src\evaluador\evaluador.h"
+#include "../evaluador/evaluador.h"
 
 typedef struct Entorno {
     char *nombre;

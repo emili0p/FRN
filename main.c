@@ -22,7 +22,7 @@ int main() {
     }
 
     // Limpieza
-    liberar_objeto(resultado);
+    Liberar_Objeto(resultado);
     liberar_ast(raiz);
     for (int i = 0 ; i < num_tokens; i++) free(tokens[i]);
     free(tokens);

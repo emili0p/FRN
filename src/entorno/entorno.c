@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include "src\entorno\entorno.h"
+#include "entorno.h"
 
 Entorno *crearentorno(){
     return NULL;
